@@ -1,0 +1,30 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+
+    <p>Topics: {{ topic }}</p> <!-- show topic currently displayed -->
+
+    <p>Entries:</p>
+    <p>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
+    </p>
+    <ul> <!-- start of bulleted list -->
+    {% for entry in entries %} <!-- for loop -->
+        <li>
+            <p>{{ entry.date_added|date:'M d, Y H:i' }}</p> <!-- each item in list includes added date in MDYear Hour format-->
+            <p>{{ entry.text|linebreaks}}</p> <!-- lists full text from entry, with added line breaks -->
+            <p>
+                <a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
+            </p>
+        </li>
+    {% empty %} <!-- informs user there are no entries -->
+        <li>
+            There are no entries for this topic yet.
+        </li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock content %}
+

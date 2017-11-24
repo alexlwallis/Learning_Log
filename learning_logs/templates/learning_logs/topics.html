@@ -1,0 +1,20 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+
+    <p>Topics</p> <!-- show topic currently displayed -->
+
+    <ul> <!-- start of bulleted list -->
+        {% for topic in topics %} <!-- for loop -->
+            <li>
+                <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a><!-- now each topic is linked to right page -->
+            </li>
+        {% empty %} <!-- informs user there are no entries -->
+            <li>No topics have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+<a href="{% url 'learning_logs:new_topic'%}">Add a new topic:</a>
+
+{% endblock content %}
